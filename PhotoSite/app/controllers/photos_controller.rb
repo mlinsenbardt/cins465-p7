@@ -27,7 +27,7 @@ class PhotosController < ApplicationController
     @photo = Photo.new(photo_params)
     @photo.path = params[:photo][:path]
     @photo.save
-    respond_with @photo 
+   # respond_with @photo 
 
     respond_to do |format|
       if @photo.save
