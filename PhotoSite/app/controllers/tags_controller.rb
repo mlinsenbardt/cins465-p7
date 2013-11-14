@@ -4,7 +4,8 @@ class TagsController < ApplicationController
   # GET /tags
   # GET /tags.json
   def index
-    @tags = Tag.all
+    @photo = Photo.find(params[:photo_id])
+    @tag = @photo.tags.new
   end
 
   # GET /tags/1
@@ -14,7 +15,8 @@ class TagsController < ApplicationController
 
   # GET /tags/new
   def new
-    @tag = Tag.new
+    @photo = Photo.find(params[:photo_id])
+    @tag = @photo.tags.new
   end
 
   # GET /tags/1/edit
@@ -24,11 +26,14 @@ class TagsController < ApplicationController
   # POST /tags
   # POST /tags.json
   def create
+    @photo = Photo.find(params[:photo_id])
     @tag = Tag.new(tag_params)
+    @tag.photo = @photo  # same as @review.video_id = @video.id
+    #@tag = @photo.tags.build(params[:tag])
 
     respond_to do |format|
       if @tag.save
-        format.html { redirect_to @tag, notice: 'Tag was successfully created.' }
+        format.html { redirect_to @tag.photo, notice: 'Tag was successfully created.' }
         format.json { render action: 'show', status: :created, location: @tag }
       else
         format.html { render action: 'new' }
@@ -64,7 +69,9 @@ class TagsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_tag
-      @tag = Tag.find(params[:id])
+      #@tag = Tag.find(params[:id])
+      @photo = Photo.find(params[:photo_id])
+      @tag = @photo.tags.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

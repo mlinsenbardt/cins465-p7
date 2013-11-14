@@ -5,9 +5,10 @@
 </p>
 
 <p>
-  <strong>Filename:</strong>
+  <strong>Photo:</strong>
   <%= image_tag @photo.path.url(:medium) %>
 </p>
 
-<%= link_to 'Edit', edit_photo_path(@photo) %> |
-<%= link_to 'Back', photos_path %>
+<p><%= link_to 'All Photos', root_path %></p>
+<p><%= link_to 'Add tag', new_photo_tag_path(@photo) %></p>
+

@@ -1,10 +1,14 @@
 PhotoSite::Application.routes.draw do
-  resources :tags
+  #resources :tags
 
-  resources :photos
+  #resources :photos
+  get 'query', to: "home#query"
 
+  resources :photos do
+    resources :tags, :shallow => true
+  end
   devise_for :users
-  get "home/index"
+  get "/home/index"
   root 'home#index'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

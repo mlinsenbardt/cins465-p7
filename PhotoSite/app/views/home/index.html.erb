@@ -1,12 +1,21 @@
-<h1>Home#index</h1>
+<head>
+	<h1>ImageSource</h1>
+	<span><%= link_to "My Photos", '/photos#index' %></span>
+		<div id="user_nav">
+    	  	<% if user_signed_in? %>
+    	          Signed in as <%= current_user.email %>. Not you?
+    	          <%= link_to "Sign out", destroy_user_session_path, :method => :delete %><br>
+    	  	<% else %>
+    	          <%= link_to "Sign up", new_user_registration_path %> or <%= link_to "Sign in", 	new_user_session_path %>
+       		<% end %>
+		</div>
+</head>
 
-<div id="user_nav">
-      <% if user_signed_in? %>
-              Signed in as <%= current_user.email %>. Not you?
-              <%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
-      <% else %>
-              <%= link_to "Sign up", new_user_registration_path %> or <%= link_to "Sign in", new_user_session_path %>
-      <% end %>
-</div>
+<% if user_signed_in? %>
+	<%= form_tag "/query" , method: "get" do %>
+	      <%= label_tag  :query, "Search for" %>
+	      <%= text_field_tag :query %>
+	      <%= submit_tag "Lookup"%>
+	<% end %>
+<% end %>
 
-<p>Find me in app/views/home/index.html.erb</p>

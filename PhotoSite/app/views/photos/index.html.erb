@@ -1,4 +1,8 @@
-<h1>Listing photos</h1>
+<head>
+  <h1>My Photos</h1>
+  <%= link_to 'Search with Tags', "/home/index" %><br>
+  <%= link_to 'New Photo', new_photo_path %>
+</head>
 
 <table>
   <thead>
@@ -25,5 +29,3 @@
 </table>
 
 <br>
-
-<%= link_to 'New Photo', new_photo_path %>
