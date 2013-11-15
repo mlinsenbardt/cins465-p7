@@ -9,6 +9,18 @@
   <%= image_tag @photo.path.url(:medium) %>
 </p>
 
-<p><%= link_to 'All Photos', root_path %></p>
-<p><%= link_to 'Add tag', new_photo_tag_path(@photo) %></p>
+<div class="form-actions">
+  <%= link_to t('.back', :default => t("helpers.links.back")),
+              photos_path, :class => 'btn'  %>
+  <%= link_to t('.edit', :default => t("helpers.links.edit")),
+              edit_photo_path(@photo), :class => 'btn' %>
+  <%= link_to t('Add tag', :default => t("helpers.links.add tag")),
+              new_photo_tag_path(@photo), :class => 'btn' %>
+  <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+              photo_path(@photo),
+              :method => 'delete',
+              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+              :class => 'btn btn-danger' %>
+</div>
+
 

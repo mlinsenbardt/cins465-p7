@@ -1,0 +1,28 @@
+<h1>Search Results</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Photo</th>
+      <th>Tags</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @results.each do |photo| %>
+      <tr>
+        <td><%= photo.title %></td>
+        <td class="alt"><%= image_tag photo.path.url(:thumb) %></td>
+        <td><%= photo.tags.each do |tag| tag.key end %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+    <div class="form-actions">
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                photos_path, :class => 'btn' %>
+  </div>

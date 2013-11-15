@@ -16,6 +16,7 @@ ActiveRecord::Schema.define(version: 20131109234907) do
   create_table "photos", force: true do |t|
     t.string   "title"
     t.string   "filename"
+    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "path_file_name"

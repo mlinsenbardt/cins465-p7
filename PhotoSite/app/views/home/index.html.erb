@@ -1,21 +1,37 @@
 <head>
-	<h1>ImageSource</h1>
-	<span><%= link_to "My Photos", '/photos#index' %></span>
-		<div id="user_nav">
-    	  	<% if user_signed_in? %>
-    	          Signed in as <%= current_user.email %>. Not you?
-    	          <%= link_to "Sign out", destroy_user_session_path, :method => :delete %><br>
-    	  	<% else %>
-    	          <%= link_to "Sign up", new_user_registration_path %> or <%= link_to "Sign in", 	new_user_session_path %>
-       		<% end %>
-		</div>
+	<h1>Welcome to ImageSource!</h1>
 </head>
-
+<br>
+<br>
+<br>
 <% if user_signed_in? %>
-	<%= form_tag "/query" , method: "get" do %>
-	      <%= label_tag  :query, "Search for" %>
-	      <%= text_field_tag :query %>
-	      <%= submit_tag "Lookup"%>
-	<% end %>
+	<div id="search_bar">
+		<p>Enter a key and a value seperated by a space</p>
+		<%= form_tag "/query" , method: "get" do %>
+	     	 <%= label_tag  :query, "Search for" %>
+	     	 <%= text_field_tag :query %>
+	    	 <%= submit_tag "Lookup"%>
+		<% end %>
+	</div>
 <% end %>
+<br>
+<br>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Photo</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @photos.each do |photo| %>
+      <tr>
+        <td><%= photo.title %></td>
+        <td class="alt"><%= image_tag photo.path.url(:thumb) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
 

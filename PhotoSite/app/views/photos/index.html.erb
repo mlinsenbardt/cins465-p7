@@ -1,7 +1,11 @@
 <head>
   <h1>My Photos</h1>
-  <%= link_to 'Search with Tags', "/home/index" %><br>
-  <%= link_to 'New Photo', new_photo_path %>
+  <br>
+  <br>
+  <%= link_to t('.search with tags', :default => t("helpers.links.search with tags")),
+              "/home/index", :class => 'btn'  %>
+  <%= link_to t('.new photo', :default => t("helpers.links.new photo")),
+              new_photo_path, :class => 'btn'  %>
 </head>
 
 <table>
@@ -19,10 +23,12 @@
     <% @photos.each do |photo| %>
       <tr>
         <td><%= photo.title %></td>
-        <td><%= image_tag photo.path.url(:thumb) %></td>
+        <td class="alt"><%= image_tag photo.path.url(:thumb) %></td>
         <td><%= link_to 'Show', photo %></td>
-        <td><%= link_to 'Edit', edit_photo_path(photo) %></td>
-        <td><%= link_to 'Destroy', photo, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% if current_user.id == photo.user_id %>
+           <td class="alt"><%= link_to 'Edit', edit_photo_path(photo) %></td>
+           <td><%= link_to 'Destroy', photo, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>

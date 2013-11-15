@@ -1,5 +1,6 @@
 class PhotosController < ApplicationController
   before_action :set_photo, only: [:show, :edit, :update, :destroy]
+  before_filter :authenticate_user!
 
   # GET /photos
   # GET /photos.json
@@ -15,6 +16,7 @@ class PhotosController < ApplicationController
   # GET /photos/new
   def new
     @photo = Photo.new
+    @photo.user_id = current_user.id
   end
 
   # GET /photos/1/edit
@@ -25,6 +27,7 @@ class PhotosController < ApplicationController
   # POST /photos.json
   def create
     @photo = Photo.new(photo_params)
+    @photo.user_id = current_user.id
     @photo.path = params[:photo][:path]
     @photo.save
    # respond_with @photo 
